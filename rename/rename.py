@@ -32,7 +32,7 @@ class Rename(commands.Cog):
         if isinstance(error, commands.CommandOnCooldown):
             print('command error')
             await ctx.reply(embed = discord.Embed(
-                description = 'Sorry, but it seems I have been rate limited. Please wait ' + error.retry_after + ' seconds. The channel will be renamed shortly, so no need to run this command again.',
+                description = 'Sorry, but it seems I have been rate limited. Please wait ' + str(error.retry_after) + ' seconds. The channel will be renamed shortly, so no need to run this command again.',
                 color = 0x06c9ff
             ))
             await ctx.message.add_reaction('❎')
