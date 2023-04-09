@@ -9,23 +9,23 @@ class Rename(commands.Cog):
     @checks.thread_only()
 
     @commands.Bot.on_command_error()
-    async def on_command_error(ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            await ctx.reply(embed = discord.Embed(
+    async def on_command_error(self, context, exception):
+        if isinstance(exception, commands.CommandOnCooldown):
+            await context.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited.',
                 color = 0x06c9ff
             ))
-            await ctx.message.add_reaction('❎')
+            await context.message.add_reaction('❎')
 
-            raise error
+            raise exception
 
-        await ctx.reply(embed = discord.Embed(
+        await context.reply(embed = discord.Embed(
             description = 'An unexpected error occurred. It has been logged to the bot console.\n\n```py\n' + error + '```',
             color = 0x06c9ff
         ))
-        await ctx.message.add_reaction('❎')
+        await context.message.add_reaction('❎')
 
-        raise error
+        raise exception
 
     @commands.cooldown(2, 5, commands.BucketType.user)
 
