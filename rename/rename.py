@@ -5,6 +5,13 @@ class Rename(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.Cog.listener()
+    async def on_plugins_ready(self, thread):
+        await thread.reply(embed = discord.Embed(
+        description = "Sorry, but it seems like you forgot to add a <request> argument.",
+        color = 0x06c9ff
+    ))
+
     @commands.command()
     async def rename(self, ctx, *, request):
         if not request:
