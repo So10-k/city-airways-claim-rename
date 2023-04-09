@@ -8,24 +8,24 @@ class Rename(commands.Cog):
 
     @checks.thread_only()
 
-    @commands.Cog.listener()
-    async def on_command_error(self, context, exception):
-        if isinstance(exception, commands.CommandOnCooldown):
-            await context.reply(embed = discord.Embed(
+    @rename.error()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            await ctx.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited.',
                 color = 0x06c9ff
             ))
-            await context.message.add_reaction('❎')
+            await ctx.message.add_reaction('❎')
         else:
-            await context.reply(embed = discord.Embed(
-                description = 'An unexpected error occurred. It has been logged to the bot console.\n\n```py\n' + str(exception) + '```',
+            await ctx.reply(embed = discord.Embed(
+                description = 'An unexpected error occurred. It has been logged to the bot console.\n\n```py\n' + str(error) + '```',
                 color = 0x06c9ff
             ))
-            await context.message.add_reaction('❎')
+            await ctx.message.add_reaction('❎')
 
-            raise exception
+            raise error
 
-    @commands.cooldown(2, 5, commands.BucketType.user)
+    @commands.cooldown(2, 5, commands.BucketType.channel)
 
     @commands.command()
     async def rename(self, ctx, *, request):
