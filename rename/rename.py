@@ -6,11 +6,9 @@ class Rename(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    client = commands.Bot('$')
-
     @checks.thread_only()
 
-    @client.event()
+    @commands.on_command_error()
     async def on_command_error(ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             await ctx.reply(embed = discord.Embed(
