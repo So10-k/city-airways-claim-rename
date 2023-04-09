@@ -21,11 +21,16 @@ class Rename(commands.Cog):
                 color = 0x06c9ff
             ))
             await ctx.message.add_reaction('❎')
+        except: # If a thread is closed, we should notify the sender.
+            await ctx.send(embed = discord.Embed(
+                description = 'An unexpected error occurred.',
+                color = 0x06c9ff
+            ))
         
     @rename.error
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
-            ctx.send('cooldown')
+            print('command error')
             await ctx.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited. Please wait ' + error.retry_after + ' seconds. The channel will be renamed shortly, so no need to run this command again.',
                 color = 0x06c9ff
