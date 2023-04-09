@@ -8,7 +8,7 @@ class Rename(commands.Cog):
     @commands.command()
     async def rename(self, ctx, *, request):
         if not request:
-            await ctx.message.reply(embed = discord.Embed(
+            await ctx.reply(embed = discord.Embed(
                 description = "Sorry, but it seems like you forgot to add a <request> argument.",
                 color = 0x06c9ff
             ))
@@ -18,13 +18,13 @@ class Rename(commands.Cog):
             await ctx.channel.edit(name = request)
             await ctx.message.add_reaction('✅')
         except discord.errors.Forbidden:
-            await ctx.message.reply(embed = discord.Embed(
+            await ctx.reply(embed = discord.Embed(
                 description = "Sorry, but it seems I can't perform this action due to my permission levels.",
                 color = 0x06c9ff
             ))
             await ctx.message.add_reaction('❎')
         except discord.errors.RateLimited:
-            await ctx.message.reply(embed = discord.Embed(
+            await ctx.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited.',
                 color = 0x06c9ff
             ))
