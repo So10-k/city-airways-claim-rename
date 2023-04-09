@@ -9,9 +9,8 @@ class Rename(commands.Cog):
     @checks.thread_only()
 
     @commands.Cog.listener()
-    async def on_command_error(self, context, exception):
+    async def cog_command_error(self, context, exception):
         if isinstance(exception, commands.CommandOnCooldown):
-            context.send(str(exception))
             await context.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited.',
                 color = 0x06c9ff
@@ -19,7 +18,7 @@ class Rename(commands.Cog):
             await context.message.add_reaction('❎')
         else:
             await context.reply(embed = discord.Embed(
-                description = 'An unexpected error occurred. It has been logged to the bot console.\n\n```py\n' + exception + '```',
+                description = 'An unexpected error occurred. It has been logged to the bot console.\n\n```py\n' + str(exception) + '```',
                 color = 0x06c9ff
             ))
             await context.message.add_reaction('❎')
