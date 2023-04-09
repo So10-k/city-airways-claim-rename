@@ -25,6 +25,7 @@ class Rename(commands.Cog):
     @rename.error
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
+            ctx.send('cooldown')
             await ctx.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited. Please wait ' + error.retry_after + ' seconds. The channel will be renamed shortly, so no need to run this command again.',
                 color = 0x06c9ff
