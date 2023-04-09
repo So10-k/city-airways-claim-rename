@@ -8,7 +8,7 @@ class Rename(commands.Cog):
 
     @checks.thread_only()
 
-    @commands.on_command_error()
+    @commands.Bot.on_command_error()
     async def on_command_error(ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             await ctx.reply(embed = discord.Embed(
