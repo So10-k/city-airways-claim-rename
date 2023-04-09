@@ -29,6 +29,12 @@ class Rename(commands.Cog):
                 color = 0x06c9ff
             ))
             await ctx.message.add_reaction('❎')
+        except:
+            await ctx.reply(embed = discord.Embed(
+                description = 'An unexpected error occurred.',
+                color = 0x06c9ff
+            ))
+            await ctx.message.add_reaction('❎')
 
 async def setup(bot):
     await bot.add_cog(Rename(bot))
