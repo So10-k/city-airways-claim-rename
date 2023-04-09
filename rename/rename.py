@@ -8,6 +8,14 @@ class Rename(commands.Cog):
 
     @checks.thread_only()
 
+    @commands.Cog.listener()
+    async def on_command_error(ctx):
+        await ctx.reply(embed = discord.Embed(
+            description = 'Sorry, but it seems I have been rate limited.',
+            color = 0x06c9ff
+        ))
+        await ctx.message.add_reaction('❎')
+
     @commands.command()
     async def rename(self, ctx, *, request):
         if not request:
