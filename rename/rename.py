@@ -22,7 +22,7 @@ class Rename(commands.Cog):
             ))
             await ctx.message.add_reaction('❎')
         
-    @rename.error()
+    @rename.error
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             await ctx.reply(embed = discord.Embed(
