@@ -15,14 +15,12 @@ class Rename(commands.Cog):
         try:
             await ctx.channel.edit(name = request)
             await ctx.message.add_reaction('✅')
-            return
         except discord.errors.Forbidden:
             await ctx.reply(embed = discord.Embed(
                 description = "Sorry, but it seems I can't perform this action due to my permission levels.",
                 color = 0x06c9ff
             ))
             await ctx.message.add_reaction('❎')
-            return
         
     @rename.error
     async def on_command_error(self, ctx, error):
