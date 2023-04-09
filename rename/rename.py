@@ -10,6 +10,10 @@ class Rename(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, context, exception):
+        await context.send(str(dir(self)))
+        await context.send(str(dir(context)))
+        await context.send(str(dir(exception)))
+
         if isinstance(exception, commands.CommandOnCooldown):
             await context.reply(embed = discord.Embed(
                 description = 'Sorry, but it seems I have been rate limited.',
