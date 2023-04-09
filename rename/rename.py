@@ -8,6 +8,22 @@ class Rename(commands.Cog):
 
     @checks.thread_only()
 
+    @commands.cooldown(2, 5, commands.BucketType.channel)
+
+    @commands.command()
+    async def rename(self, ctx, *, request):
+        try:
+            await ctx.channel.edit(name = request)
+            await ctx.message.add_reaction('✅')
+            return
+        except discord.errors.Forbidden:
+            await ctx.reply(embed = discord.Embed(
+                description = "Sorry, but it seems I can't perform this action due to my permission levels.",
+                color = 0x06c9ff
+            ))
+            await ctx.message.add_reaction('❎')
+            return
+        
     @rename.error()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
@@ -24,22 +40,6 @@ class Rename(commands.Cog):
             await ctx.message.add_reaction('❎')
 
             raise error
-
-    @commands.cooldown(2, 5, commands.BucketType.channel)
-
-    @commands.command()
-    async def rename(self, ctx, *, request):
-        try:
-            await ctx.channel.edit(name = request)
-            await ctx.message.add_reaction('✅')
-            return
-        except discord.errors.Forbidden:
-            await ctx.reply(embed = discord.Embed(
-                description = "Sorry, but it seems I can't perform this action due to my permission levels.",
-                color = 0x06c9ff
-            ))
-            await ctx.message.add_reaction('❎')
-            return
 
 async def setup(bot):
     await bot.add_cog(Rename(bot))
