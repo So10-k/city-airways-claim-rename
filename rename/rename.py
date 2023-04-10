@@ -8,42 +8,40 @@ class Rename(commands.Cog):
 
     @checks.thread_only()
 
-    @commands.cooldown(2, 5, commands.BucketType.channel)
-
     @commands.command()
     async def rename(self, ctx, *, request):
         try:
-            await ctx.channel.edit(name = request)
+            embed = discord.Embed(
+                title = 'Changing channel name..',
+                description = ('Updating channel name to %s' % request),
+                color = str(discord.Color.yellow())
+            )
+            embed.set_footer(text = 'Nicklaus#5688 \b Rename')
+
+            edit = await ctx.reply(embed = embed)
+            await ctx.message.add_reaction('⏱️')
+
+            await ctx.channel.edit(name = request) # Edit channel name, finally.
+
+            embed = discord.Embed(
+                title = 'Changed channel name!',
+                description = ('Updated channel name to %s' % request),
+                color = str(discord.Color.green())
+            )
+            embed.set_footer(text = 'Nicklaus#5688 \b Rename')
+
+            edit.edit(embed = embed)
             await ctx.message.add_reaction('✅')
         except discord.errors.Forbidden:
-            await ctx.reply(embed = discord.Embed(
-                description = "Sorry, but it seems I can't perform this action due to my permission levels.",
-                color = 0x06c9ff
-            ))
-            await ctx.message.add_reaction('❎')
-        except: # If a thread is closed, we should notify the sender.
-            await ctx.send(embed = discord.Embed(
-                description = 'An unexpected error occurred.',
-                color = 0x06c9ff
-            ))
-        
-    @rename.error
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            print('command error')
-            await ctx.reply(embed = discord.Embed(
-                description = 'Sorry, but it seems I have been rate limited. Please wait ' + str(error.retry_after) + ' seconds. The channel will be renamed shortly, so no need to run this command again.',
-                color = 0x06c9ff
-            ))
-            await ctx.message.add_reaction('❎')
-        else:
-            await ctx.reply(embed = discord.Embed(
-                description = 'An unexpected error occurred. It has been logged to the bot console.\n\n```py\n' + str(error) + '```',
-                color = 0x06c9ff
-            ))
-            await ctx.message.add_reaction('❎')
+            embed = discord.Embed(
+                title = 'Forbidden',
+                description = "Uh oh, it seems I can't perform this action due to my permission levels.",
+                color = str(discord.Color.red()) # 0x06c9ff
+            )
+            embed.set_footer(text = 'Nicklaus#56880 \b Rename')
 
-            raise error
+            await ctx.reply(embed = embed)
+            await ctx.message.add_reaction('❎')
 
 async def setup(bot):
     await bot.add_cog(Rename(bot))
