@@ -16,7 +16,7 @@ class Rename(commands.Cog):
                 description = ('Updating channel name to %s' % request),
                 color = discord.Color.yellow()
             )
-            embed.set_footer(text = 'Nicklaus#5688 \b Rename')
+            embed.set_footer(text = 'Nicklaus#5688 • Rename')
 
             edit = await ctx.reply(embed = embed)
             await ctx.message.add_reaction('⏱️')
@@ -28,9 +28,10 @@ class Rename(commands.Cog):
                 description = ('Updated channel name to %s' % request),
                 color = discord.Color.green()
             )
-            embed.set_footer(text = 'Nicklaus#5688 \b Rename')
+            embed.set_footer(text = 'Nicklaus#5688 • Rename')
 
-            edit.edit(embed = embed)
+            await edit.edit(embed = embed)
+            await ctx.message.clear_reactions()
             await ctx.message.add_reaction('✅')
         except discord.errors.Forbidden:
             embed = discord.Embed(
@@ -38,7 +39,7 @@ class Rename(commands.Cog):
                 description = "Uh oh, it seems I can't perform this action due to my permission levels.",
                 color = discord.Color.red() # 0x06c9ff
             )
-            embed.set_footer(text = 'Nicklaus#56880 \b Rename')
+            embed.set_footer(text = 'Nicklaus#56880 • Rename')
 
             await ctx.reply(embed = embed)
             await ctx.message.add_reaction('❎')
