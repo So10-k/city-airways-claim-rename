@@ -13,7 +13,7 @@ class Rename(commands.Cog):
         try:
             embed = discord.Embed(
                 title = 'Changing channel name..',
-                description = ('Updating channel name to %s' % request),
+                description = ('Updating channel name to %s! Please keep in mind this may take a while, no need to run the command again.' % request),
                 color = discord.Color.yellow()
             )
             embed.set_footer(text = 'Nicklaus#5688 • Rename')
@@ -25,7 +25,7 @@ class Rename(commands.Cog):
 
             embed = discord.Embed(
                 title = 'Changed channel name!',
-                description = ('Updated channel name to %s' % request),
+                description = ('Updated channel name to %s!' % request),
                 color = discord.Color.green()
             )
             embed.set_footer(text = 'Nicklaus#5688 • Rename')
