@@ -18,7 +18,7 @@ class Rename(commands.Cog):
                 color = discord.Color.yellow()
             )
             embed.timestamp = datetime.datetime.utcnow()
-            embed.set_footer(text = 'Rename • Nicklaus#56880')
+            embed.set_footer(text = 'Rename • Nicklaus#5688')
 
             edit = await ctx.reply(embed = embed)
 
@@ -30,21 +30,21 @@ class Rename(commands.Cog):
                 color = discord.Color.green()
             )
             embed.timestamp = datetime.datetime.utcnow()
-            embed.set_footer(text = 'Rename • Nicklaus#56880')
+            embed.set_footer(text = 'Rename • Nicklaus#5688')
 
             await edit.edit(embed = embed)
-            await ctx.message.add_reaction('✅')
+            await ctx.message.add_reaction('✔️')
         except discord.errors.Forbidden:
             embed = discord.Embed(
                 title = 'Forbidden',
                 description = "Uh oh, it seems I can't perform this action due to my permission levels.",
-                color = discord.Color.red() # 0x06c9ff
+                color = discord.Color.red()
             )
             embed.timestamp = datetime.datetime.utcnow()
-            embed.set_footer(text = 'Rename • Nicklaus#56880')
+            embed.set_footer(text = 'Rename • Nicklaus#5688')
 
             await ctx.reply(embed = embed)
-            await ctx.message.add_reaction('❎')
+            await ctx.message.add_reaction('❌')
 
 async def setup(bot):
     await bot.add_cog(Rename(bot))
