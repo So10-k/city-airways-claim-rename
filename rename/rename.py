@@ -12,28 +12,10 @@ class Rename(commands.Cog):
     @commands.command()
     async def rename(self, ctx, *, request):
         try:
-            embed = discord.Embed(
-                title = 'Changing channel name..',
-                description = ('Updating channel name to %s!' % request),
-                color = discord.Color.yellow()
-            )
-            embed.timestamp = datetime.datetime.utcnow()
-            embed.set_footer(text = 'Rename • Nicklaus#5688')
-
-            edit = await ctx.reply(embed = embed)
-
-            await ctx.channel.edit(name = request) # Edit channel name, finally.
-
-            embed = discord.Embed(
-                title = 'Changed channel name!',
-                description = ('Updated channel name to %s!' % request),
-                color = discord.Color.green()
-            )
-            embed.timestamp = datetime.datetime.utcnow()
-            embed.set_footer(text = 'Rename • Nicklaus#5688')
-
-            await edit.edit(embed = embed)
-            await ctx.message.add_reaction('✔️')
+            await ctx.message.add_reaction('⏰')
+            await ctx.channel.edit(name = request) # Edit channel name.
+            await ctx.message.clear_reactions()
+            await ctx.message.add_reaction('✅')
         except discord.errors.Forbidden:
             embed = discord.Embed(
                 title = 'Forbidden',
