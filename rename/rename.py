@@ -16,11 +16,11 @@ class Rename(commands.Cog):
     @checks.has_permissions(PermissionLevel.SUPPORTER)
 
     @commands.command()
-    async def rename(self, ctx, *, request):
+    async def rename(self, ctx, *, member: discord.Member):
         try:
             await ctx.message.add_reaction('⏰')
             
-            await ctx.channel.edit(name = request) # Edit channel name.
+            await ctx.channel.edit(name = member) # Edit channel name.
             
             await ctx.message.clear_reactions()
             await ctx.message.add_reaction('✅')
