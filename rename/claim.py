@@ -42,4 +42,4 @@ class Rename(commands.Cog):
             await ctx.message.add_reaction('❌')
 
 async def setup(bot):
-    await bot.add_cog(Rename(bot))
+    await bot.add_cog(ClaimByJoy(bot))
